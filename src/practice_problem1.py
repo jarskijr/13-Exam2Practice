@@ -6,8 +6,8 @@ This problem provides practice at:
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Mark Hays, Amanda Stouder, Aaron Wilkin, their colleagues,
-         and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         and Jacob Jarski.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 ###############################################################################
 # Students:
@@ -41,7 +41,7 @@ def main():
     ###########################################################################
 
     # run_test_init()
-    # run_test_append_string()
+    run_test_append_string()
     # run_test_double()
     # run_test_shrink()
     # run_test_double_then_shrink()
@@ -64,6 +64,16 @@ class Box(object):
     """
 
     def __init__(self, contents, volume):
+        self.contents = contents
+        self.volume = volume
+        self.name = self
+        if len(self.contents) > self.volume:
+            self.contents = ''
+            print(self.name,"contents is", self.contents, "[The contents were too big, hence rejected]")
+            return
+
+        if len(self.contents) <= self.volume:
+            print(self.name,"contents is", self.contents)
         """
         What comes in:
           -- self
@@ -95,7 +105,7 @@ class Box(object):
           :type volume: int
         """
         # ---------------------------------------------------------------------
-        # TODO: 2. Implement and test this function.
+        # DONE: 2. Implement and test this function.
         #     See the testing code (below) for more examples.
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
@@ -105,6 +115,15 @@ class Box(object):
         # ---------------------------------------------------------------------
 
     def append_string(self, additional_contents):
+        self.contents = self.contents + additional_contents
+        if len(self.contents) <= self.volume:
+            return ''
+        if len(self.contents) > self.volume:
+            additional_contents = self.contents[self.volume, len(self.contents)]
+            self.contents = self.contents[0,  self.volume]
+            return additional_contents
+
+
         """
         What comes in:
           -- self
