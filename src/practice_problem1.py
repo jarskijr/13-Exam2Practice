@@ -41,8 +41,8 @@ def main():
     ###########################################################################
 
     # run_test_init()
-    run_test_append_string()
-    # run_test_double()
+    # run_test_append_string()
+    run_test_double()
     # run_test_shrink()
     # run_test_double_then_shrink()
     # run_test_reset()
@@ -118,7 +118,7 @@ class Box(object):
         contents = ''
         additional = ''
         self.contents = self.contents + additional_contents
-        if len(self.contents) < self.volume:
+        if len(self.contents) <= self.volume:
             return ''
         if len(self.contents) > self.volume:
             for k in range(len(self.contents)):
@@ -187,6 +187,7 @@ class Box(object):
         # ---------------------------------------------------------------------
 
     def double(self):
+        return self.append_string(self.contents)
         """
         What comes in:
           -- self
