@@ -115,16 +115,24 @@ class Box(object):
         # ---------------------------------------------------------------------
 
     def append_string(self, additional_contents):
+        contents = ''
+        additional = ''
         self.contents = self.contents + additional_contents
-        if len(self.contents) <= self.volume:
+        if len(self.contents) < self.volume:
             return ''
         if len(self.contents) > self.volume:
-            additional_contents = self.contents[self.volume, len(self.contents)]
-            self.contents = self.contents[0,  self.volume]
-            return additional_contents
+            for k in range(len(self.contents)):
+                if (k+1) <= self.volume:
+                    contents = contents + self.contents[k]
+                else:
+                    additional = additional + self.contents[k]
+            self.contents = contents
+            return additional
 
 
-        """
+
+
+            """
         What comes in:
           -- self
           -- A string that is to be appended to this Box's contents
@@ -155,7 +163,7 @@ class Box(object):
           :type additional_contents: str
         """
         # ---------------------------------------------------------------------
-        # TODO: 3. Implement and test this function.
+        # DONE: 3. Implement and test this function.
         #     See the testing code (below) for more examples.
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
