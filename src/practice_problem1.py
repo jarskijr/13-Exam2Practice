@@ -47,8 +47,8 @@ def main():
     run_test_double_then_shrink()
     run_test_reset()
     run_test_steal()
-    # run_test_get_history()
-    # run_test_combined_box()
+    run_test_get_history()
+    run_test_combined_box()
 
 
 ###############################################################################
@@ -64,6 +64,7 @@ class Box(object):
     """
 
     def __init__(self, contents, volume):
+        self.historycontents = []
         self.resetcontents = contents
         self.resetvolume = volume
         self.contents = contents
@@ -343,6 +344,7 @@ class Box(object):
         # ---------------------------------------------------------------------
 
     def reset(self):
+        self.historycontents.append(self.contents)
         self.contents = self.resetcontents
         self.volume = self.resetvolume
 
@@ -400,6 +402,7 @@ class Box(object):
         #######################################################################
 
     def get_history(self):
+        return self.historycontents
         """
         What comes in:
           -- self
@@ -429,7 +432,7 @@ class Box(object):
           #   h is now ['GoodGo', 'GoodBye']
         """
         # ---------------------------------------------------------------------
-        # TODO: 9. Implement and test this function.
+        # DONE: 9. Implement and test this function.
         #     The testing code is already written for you (above).
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
@@ -439,6 +442,8 @@ class Box(object):
         # ---------------------------------------------------------------------
 
     def combined_box(self, other_box):
+        combined_box = Box(self.contents + other_box.contents, self.volume + other_box.volume)
+        return combined_box
         """
         What comes in:
           -- self
@@ -456,7 +461,7 @@ class Box(object):
           :type other_box: Box
         """
         # ---------------------------------------------------------------------
-        # TODO: 10. Implement and test this function.
+        # DONE: 10. Implement and test this function.
         #     The testing code is already written for you (above).
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
