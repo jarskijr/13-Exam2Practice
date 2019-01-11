@@ -44,8 +44,8 @@ def main():
     run_test_append_string()
     run_test_double()
     run_test_shrink()
-    # run_test_double_then_shrink()
-    # run_test_reset()
+    run_test_double_then_shrink()
+    run_test_reset()
     # run_test_steal()
     # run_test_get_history()
     # run_test_combined_box()
@@ -64,10 +64,13 @@ class Box(object):
     """
 
     def __init__(self, contents, volume):
+        self.resetcontents = contents
+        self.resetvolume = volume
         self.contents = contents
         self.volume = volume
         self.name = self
         if len(self.contents) > self.volume:
+            self.resetcontents = ''
             self.contents = ''
             print(self.name,"contents is", self.contents, "[The contents were too big, hence rejected]")
             return
@@ -235,8 +238,8 @@ class Box(object):
         #######################################################################
 
     def shrink(self, new_volume):
-        self.volume = new_volume + 0
-        return self.append_string(self.contents)
+        self.volume = new_volume
+        return self.append_string('')
         """
         What comes in:
           -- self
@@ -272,7 +275,7 @@ class Box(object):
           :type new_volume: int
         """
         # ---------------------------------------------------------------------
-        # TODO: 5. Implement and test this function.
+        # DONE: 5. Implement and test this function.
         #     The testing code is already written for you (above).
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
@@ -285,6 +288,8 @@ class Box(object):
         # ---------------------------------------------------------------------
 
     def double_then_shrink(self, new_volume):
+        double = len(self.double())
+        return len(self.shrink(new_volume)) + double
         """
         What comes in:
           -- self
@@ -328,7 +333,7 @@ class Box(object):
           :type new_volume: int
         """
         # ---------------------------------------------------------------------
-        # TODO: 6. Implement and test this function.
+        # DONE: 6. Implement and test this function.
         #     The testing code is already written for you (above).
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
@@ -338,6 +343,10 @@ class Box(object):
         # ---------------------------------------------------------------------
 
     def reset(self):
+        self.contents = self.resetcontents
+        self.volume = self.resetvolume
+
+
         """
         What comes in:
           -- self
@@ -347,7 +356,7 @@ class Box(object):
           when this Box was constructed.
         """
         # ---------------------------------------------------------------------
-        # TODO: 7. Implement and test this function.
+        # DONE: 7. Implement and test this function.
         #     The testing code is already written for you (above).
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
